@@ -16,6 +16,9 @@ function clock() {
     second.style = `transform: rotate(${sec}deg)`
     minutes.style = `transform: rotate(${min}deg)`
     hours.style = `transform: rotate(${hour + (min / 12)}deg)`
+    hour < 10 ? hoursBottom.innerText = '0' + hour : hoursBottom.innerText = hour
+minutes < 10 ? minutesBottom.innerText = '0' + min :  minutesBottom.innerText = min
+
     setTimeout(() => {
         clock()
     }, 1000); 
@@ -23,40 +26,75 @@ function clock() {
 clock()
 
 
-function bottom() {
-    let time = new Date()
-    let minut = time.getMinutes()
-    let hours = time.getHours()
+// second.animate(
+//     [
+//         {transform:`rotate(${sec}deg)`},
+//         {transform:`rotate(${sec + 6}deg)`},
+//     ],
+//     {
+//         fill:'forwards',
+//         duration:1000,
+//         easing:'linear'
+//     }
+// )
+
+
+
+
+const tabsItem = document.querySelectorAll('.tabsItem')
+
+for (let i = 0; i < tabsItem.length; i++) {
     
-    if (minut < 10) {
-        
-        minut = '0' + minut
-
-    } else {
-        minut = minut
-    }
+    tabsItem[i].addEventListener('click', function() {
+for (let x = 0; x < tabsItem.length; x++) {
     
-
-
-    if (hours < 10) {
-        
-        hours = '0' + hours
-
-    } else {
-        hours = hours
-    }
-    hoursBottom.innerText = hours
-    minutesBottom.innerText = minut
-    
-    setTimeout(() => {
-        bottom()
-    }, 1000);
+    tabsItem[x].classList.remove('active')
+    tabsContent[x].classList.remove('active')
     
 }
-bottom()
+        tabsItem[i].classList.add('active')
+        tabsContent[i].classList.add('active')
+    })
+
+}
+
+const tabsContent = document.querySelectorAll('.tabsContentItem')
+const secund = document.querySelector('.stopwatch__seconds')
 
 
+const btn = document.querySelector('.stopwatch__btn')
 
+btn.addEventListener('click', function () {
+    
+    if (btn.innerHTML == 'start') {
+        btn.innerHTML = 'stop'
+        let i = 0 
+        setTimeout(() => stopWatch(this, i), 1000)
+    }else if(btn.innerHTML == 'stop' ){
+        btn.innerHTML = 'clear'
+    }else if (btn.innerHTML == 'clear'){
+        btn.innerHTML = 'start'
+    }
+    
+    
+    
+})
+
+
+function stopWatch(btn, i) {
+    
+    if (btn.innerHTML == 'stop') {
+        if (i == 60) {
+            
+        } else {
+            i++
+            secund.innerHTML = i
+        }
+        setTimeout(() => {
+            stopWatch(btn, i)
+        }, 1000);
+    }
+}
 
 
 
