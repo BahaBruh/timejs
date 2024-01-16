@@ -16,8 +16,8 @@ function clock() {
     second.style = `transform: rotate(${sec}deg)`
     minutes.style = `transform: rotate(${min}deg)`
     hours.style = `transform: rotate(${hour + (min / 12)}deg)`
-    hour < 10 ? hoursBottom.innerText = '0' + hour : hoursBottom.innerText = hour
-minutes < 10 ? minutesBottom.innerText = '0' + min :  minutesBottom.innerText = min
+    hoursBottom.innerText = time.getHours() < 10 ?  '0' + time.getHours() : time.getHours()
+    minutesBottom.innerText = time.getMinutes() < 10 ?  '0' + time.getMinutes() :  time.getMinutes()
 
     setTimeout(() => {
         clock()
@@ -60,7 +60,7 @@ for (let x = 0; x < tabsItem.length; x++) {
 
 const tabsContent = document.querySelectorAll('.tabsContentItem')
 const secund = document.querySelector('.stopwatch__seconds')
-
+const minut = document.querySelector('.stopwatch__minutes')
 
 const btn = document.querySelector('.stopwatch__btn')
 
@@ -84,8 +84,10 @@ btn.addEventListener('click', function () {
 function stopWatch(btn, i) {
     
     if (btn.innerHTML == 'stop') {
-        if (i == 60) {
-            
+        if (i == 59) {
+            x++
+            minut.innerHTML = x
+            secund.innerHTML = secund - secund
         } else {
             i++
             secund.innerHTML = i
@@ -93,6 +95,20 @@ function stopWatch(btn, i) {
         setTimeout(() => {
             stopWatch(btn, i)
         }, 1000);
+    }
+    
+    
+
+
+
+
+
+    if (btn.innerHTML == 'start'){
+
+    minut.innerHTML = minut - minut
+    secund.innerHTML = secund - secund
+    
+
     }
 }
 
