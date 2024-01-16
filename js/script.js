@@ -81,32 +81,30 @@ btn.addEventListener('click', function () {
 })
 
 
-function stopWatch(btn, i) {
+function stopWatch(btn, i, x) {
     
     if (btn.innerHTML == 'stop') {
         if (i == 59) {
+            x = minut.innerHTML
             x++
             minut.innerHTML = x
-            secund.innerHTML = secund - secund
+            secund.innerHTML = i
+            i = 0
+
         } else {
             i++
             secund.innerHTML = i
         }
-        setTimeout(() => {
-            stopWatch(btn, i)
-        }, 1000);
+        
     }
-    
-    
-
-
-
-
+    setTimeout(() => {
+        stopWatch(btn, i, x)
+    }, 1000);
 
     if (btn.innerHTML == 'start'){
 
-    minut.innerHTML = minut - minut
-    secund.innerHTML = secund - secund
+    minut.innerHTML = 0
+    secund.innerHTML = 0
     
 
     }
